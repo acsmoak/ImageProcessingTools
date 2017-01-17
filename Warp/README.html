@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+    <title>Warping</title>
+</head>
+
+<body>
+    <header>
+        <h1>Homework 5: Image Warping</h1>
+
+        <hr>
+
+        <h4>Name: Mandy Smoak &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Date: November 6, 2016</h4>
+
+        <hr>
+    </header>
+        
+        <h2>Problem Description</h2>
+        
+        <p>Image warping is the process of digitally manipulating an image such that any shapes portrayed in the image have been distorted. While an image can be transformed in various ways, pure warping means that points are mapped to points without changing the colors. This can be based mathematically on any function from (part of) the plane to the plane.  </p>
+
+        <p>In geometry, an affine transformation is a function between affine spaces which preserves points, straight lines, and planes. Also, sets of parallel lines remain parallel after an affine transformation. An affine transformation does not necessarily preserve angles between lines or distances between points, though it does preserve ratios of distances between points lying on a straight line. </p>
+        <p> This week we were asked to build a warping tool based on affine and projective warps. The tool provides for input of a sequence of operations, composes a single transform from the sequence, and  finally, will apply the transform to the input image via inverse mapping. The program constructs the matrices for each of the following transformations:  translate,  rotate,  scale,  and  shear. Finally, the tool warps an input image into the new shape, and then performs inverse mapping of the input image to the output image via the inverse of the transformation. </p>
+
+<hr>
+        
+        <h2>Basic Requirements</h2>
+         <ul>
+            <li>Reads, writes, displays images using OIIO and OpenGL</li>
+            <li>Handles input from keyboard</li>
+            <li>Performs rotation, scaling, translation, and shearing on an image specified by the user</li>
+            <li>Can handle multiple transformations on a single image</li>
+         </ul>
+
+        <h2>Advanced Extension</h2>
+         <ul>
+            <li>Additionally, performs flipping, perspective warping, and twirling on image</li>
+         </ul>
+         <hr>
+
+         <h2>Instructions</h2>     
+
+         <p>The following commands can be used in the terminal for complication, execution, and clean-up.
+        
+         <h4> Compile: </h4>
+         <p> $> make </p>
+         <h4> Execute: </h4>
+         <p> $> ./warper input.jpg </p> 
+         <ul>
+            <li>Displays the input image in an opengl window</li>
+            <li>All commands accept doubles except 'f' which accepts integers</li> 
+            &emsp; r θ &nbsp; - &nbsp; counter clockwise rotation <br>
+            &emsp; s sx sy &nbsp; - &nbsp; scale <br>
+            &emsp; t dx dy &nbsp; - &nbsp; translate <br>
+            &emsp; h hx hy &nbsp; - &nbsp; shear <br>
+            &emsp; f fx fy &nbsp; - &nbsp; flip <br>
+            &emsp; p px py &nbsp; - &nbsp; perspective <br>
+            &emsp; n cx cy s &nbsp; - &nbsp; twirl <br>
+            &emsp; d &nbsp; - &nbsp; done
+         </ul>
+         <p> $> ./warper input.jpg output.jpg </p>
+         <ul>
+            <li>Same functionality as above except pressing 'w' writes the image in the opengl window to output.jpg</li>
+         </ul>
+         <h4> Clean: </h4>
+         <p> $> make clean </p>
+    <hr>
+      <p><strong>Known Issues:</strong> I had to copy and paste the contents of <em>matrix.cpp</em> into <em>matrix.h</em> so 
+      that my <em>warper.cpp</em> program could find and use its functions. Additionally, the result of using the translation 
+      function is not obvious because the output image is redrawn based on the location of the image's four corners after all warps are performed.</p>
+    <hr>
+    <h2>Experimentation & Results</h2>
+    
+    <h3>Original Image</h3>
+	<img src="olly.jpg" alt="olly.jpg" align="middle">
+    
+<p>&nbsp;</p>    
+	
+    <h3>Rotation</h3>
+    <p>theta: 45 <br />
+    Result Image: rotate.jpg</p>
+    <img src="results/rotate.jpg" alt="rotate.jpg" align="middle">
+   
+<p>&nbsp;</p>    
+
+    <h3>Scale</h3>
+    <p>sx: 0.25 sy: 0.25 <br />
+    Result Image: scale.jpg</p>
+    <img src="results/scale.jpg" alt="scale.jpg" align="middle">    
+   
+<p>&nbsp;</p>    
+
+    <h3>Translate</h3>
+    <p>dx: 400 dy: 400 <br />
+    Result Image: translate.jpg</p>
+    <img src="results/translate.jpg" alt="translate.jpg" align="middle">    
+
+<p>&nbsp;</p>    
+
+    <h3>Shear</h3>
+    <p>hx: 0.75 hy: 0.25 <br />
+    Result Image: shear.jpg</p>
+    <img src="results/shear.jpg" alt="shear.jpg" align="middle">    
+   
+<p>&nbsp;</p>    
+
+    <h3>Flip</h3>
+    <p>fx: 1 fy: 0 <br />
+    Result Image: flip.jpg</p>
+    <img src="results/flip.jpg" alt="flip.jpg" align="middle">    
+  
+<p>&nbsp;</p>    
+
+    <h3>Perspective Warp</h3>
+    <p>px: 0.0000001 py: 0.005 <br />
+    Result Image: perspective.jpg</p>
+    <img src="results/perspective.jpg" alt="perspective.jpg" align="middle">    
+
+<p>&nbsp;</p>    
+ 
+    <h3>Twirl</h3>
+    <p>cx: 0.5 cy: 0.5 s: 5 <br />
+    Result Image: twirl.jpg</p>
+    <img src="results/twirl.jpg" alt="twirl.jpg" align="middle">    
+
+<p>&nbsp;</p>    
+ 
+    <h3>Multiple</h3>
+    <p>Transformations: rotate and scale<br />
+    Result Image: multiple.jpg</p>
+    <img src="results/multiple.jpg" alt="multiple.jpg" align="middle"> 
+
+<p>&nbsp;</p>    
+ 
+    <h3>Multiple 2</h3>
+    <p>Transformations: shear and flip<br />
+    Result Image: multiple2.jpg</p>
+    <img src="results/multiple2.jpg" alt="multiple2.jpg" align="middle"> 
+<p>&nbsp;</p>    
+
+    <hr>
+
+    <h3>Clemson University</h3>
+    <p>CPSC 6040: Computer Graphics Images, Ioannis Karamouzas</p>
+   
+    
+</body>
+</html>

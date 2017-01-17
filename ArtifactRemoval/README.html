@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+    <title>Warping with Artifact Reconstruction</title>
+</head>
+
+<body>
+    <header>
+        <h1>Homework 6: Image Warping with Artifact Reconstruction</h1>
+
+        <hr>
+
+        <h4>Name: Mandy Smoak &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Date: November 15, 2016</h4>
+
+        <hr>
+    </header>
+        
+        <h2>Problem Description</h2>
+        
+        <p>Image warping is the process of digitally manipulating an image such that any shapes portrayed in the image have been distorted. While an image can be transformed in various ways, pure warping means that points are mapped to points without changing the colors. This can be based mathematically on any function from (part of) the plane to the plane.  </p>
+
+        <p>In geometry, an affine transformation is a function between affine spaces which preserves points, straight lines, and planes. Also, sets of parallel lines remain parallel after an affine transformation. An affine transformation does not necessarily preserve angles between lines or distances between points, though it does preserve ratios of distances between points lying on a straight line. </p>
+        <p> Last week we were asked to build a warping tool based on affine and projective warps. The tool provides for input of a sequence of operations, composes a single transform from the sequence, and  finally, will apply the transform to the input image via inverse mapping. The program constructs the matrices for each of the following transformations: perspective warping, twirling, and inverse map warping. Finally, the tool warps an input image into the new shape, and then performs inverse mapping of the input image to the output image via the inverse of the transformation. </p>
+        <p> A typical image warp can produce both maginification and minification in the output image. Where the warped image is magnified compared with the input, the artifacts are the result of oversampling. Where the warped image is minified compared with the input, the artifacts are aliasing errors due to undersampling. This week, we were asked to choose a strategy for artifact removal in the presence of nonlinear warps. </p>
+
+<hr>
+        
+        <h2>Basic Requirements</h2>
+         <ul>
+            <li>Reads, writes, displays images using OIIO and OpenGL</li>
+            <li>Handles input from keyboard</li>
+            <li>Performs a perspective warp and twirl on an image specified by the user</li>
+            <li>Repairs the warped image using <i>bilinear interpolation</i></li>
+            <li>Can toggle between repaired and unrepaired</li>
+         </ul>
+
+        <h2>Advanced Extension</h2>
+         <ul>
+            <li>Fixes the minification/aliasing artifacts by implementing adaptive <i>supersampling</i></li>
+         </ul>
+         <hr>
+
+         <h2>Instructions</h2>     
+
+         <p>The following commands can be used in the terminal for complication, execution, and clean-up.
+        
+         <h4> Compile: </h4>
+         <p> $> make </p>
+         <h4> Execute: </h4>
+         <p> $> ./okwarp input.img </p> 
+         <ul>
+            <li>Displays the input image in an opengl window</li>
+            <li>All commands accept doubles</li> 
+            &emsp; p px py &nbsp; - &nbsp; perspective <br>
+            &emsp; n cx cy s &nbsp; - &nbsp; twirl <br>
+            &emsp; d &nbsp; - &nbsp; done
+            <li>Toggles between original warps and repaired warps</li>
+            &emsp;Pressing 'b' fixes magnification artifacts with bilinear interpolation <br>
+            &emsp;Pressing 'r' fixes both magnification artifacts with bilinear interpolation and minification artifacts with supersampling <br>           
+         </ul>
+         <p> $> ./okwarp input.img output.img </p>
+         <ul>
+            <li>Same functionality as above except pressing 'w' writes the image in the opengl window to output.img</li>
+         </ul>
+         <h4> Clean: </h4>
+         <p> $> make clean </p>
+    <hr>
+      <p><strong>Known Issues:</strong> I had to copy and paste the contents of <em>matrix.cpp</em> into <em>matrix.h</em> so 
+      that my <em>okwarp.cpp</em> program could find and use its functions. Additionally, I was unable to use the inv_map() function 
+      properly. The code wrote is commented out in <i>okwarp.cpp</i> if you'd like to take a look.</p>
+    <hr>
+    <h2>Experimentation & Results</h2>
+    
+    <h3>Original Images</h3>
+	<img src="construction.jpg" alt="construction.jpg" align="middle">
+	<img src="olly.jpg" alt="olly.jpg" align="middle">
+    
+<p>&nbsp;</p>    
+	
+    <h3>Perspective & No Artifact Removal</h3>
+    <p>px: 0.00001 py: 0.002 <br />
+    <p>Result Image: perspective.jpg</p>
+    <img src="results/perspective.jpg" alt="perspective.jpg" align="middle">
+    <p>px: 0.00001 py: -0.002 <br />
+    <p>Result Image: perspective2.jpg</p>
+    <img src="results/perspective2.jpg" alt="perspective2.jpg" align="middle">
+   
+<p>&nbsp;</p>    
+
+    <h3>Perspective & Magnification Artifact Removal </h3>
+    <p>px: 0.00001 py: 0.002 <br />
+    <p>Result Image: perspective_magnification.jpg</p>
+    <img src="results/perspective_magnification.jpg" alt="perspective_magnification.jpg" align="middle">
+    <p>px: 0.00001 py: -0.002 <br />
+    <p>Result Image: perspective2_magnification.jpg</p>
+    <img src="results/perspective2_magnification.jpg" alt="perspective2_magnification.jpg" align="middle">    
+   
+<p>&nbsp;</p>    
+
+    <h3>Perspective & Both Artifact Removals</h3>
+    <p>px: 0.00001 py: 0.002 <br />
+    <p>Result Image: perspective_both.jpg</p>
+    <img src="results/perspective_both.jpg" alt="perspective_both.jpg" align="middle"> 
+    <p>px: 0.00001 py: -0.002 <br />
+    <p>Result Image: perspective2_both.jpg</p>
+    <img src="results/perspective2_both.jpg" alt="perspective2_both.jpg" align="middle">   
+
+<p>&nbsp;</p>    
+
+    <h3>Twirl & No Artifact Removal</h3>
+    <p>cx: 0.5 cy: 0.5 s: 5 </p>
+    <p>Result Image: twirl.jpg</p>
+    <img src="results/twirl.jpg" alt="twirl.jpg" align="middle">
+    <p>cx: 0.1 cy: 0.2 s: 3 </p>
+    <p>Result Image: twirl2.jpg</p>
+    <img src="results/twirl2.jpg" alt="twirl2.jpg" align="middle">    
+   
+<p>&nbsp;</p>    
+
+    <h3>Twirl & Magnification Artifact Removal</h3>
+    <p>cx: 0.5 cy: 0.5 s: 5 </p>
+    <p>Result Image: twirl_magnification.jpg</p>
+    <img src="results/twirl_magnification.jpg" alt="twirl_magnification.jpg" align="middle">    
+    <p>cx: 0.1 cy: 0.2 s: 3 </p>
+    <p>Result Image: twirl2_magnification.jpg</p>
+    <img src="results/twirl2_magnification.jpg" alt="twirl2_magnification.jpg" align="middle">
+  
+<p>&nbsp;</p>    
+
+    <h3>Twirl & Both Artifact Removals</h3>
+    <p>cx: 0.5 cy: 0.5 s: 5 </p>
+    <p> Result Image: twirl_both.jpg</p>
+    <img src="results/twirl_both.jpg" alt="twirl_both.jpg" align="middle">
+    <p>cx: 0.1 cy: 0.2 s: 3 </p>
+    <p> Result Image: twirl2_both.jpg</p>
+    <img src="results/twirl2_both.jpg" alt="twirl2_both.jpg" align="middle"    
+
+<p>&nbsp;</p>    
+
+<!-- 
+    <h3>Inverse Warp & No Artifact Removal</h3>
+    <p>Result Image: inverse.jpg</p>
+    <img src="results/inverse.jpg" alt="inverse.jpg" align="middle">    
+
+<p>&nbsp;</p>    
+ 
+    <h3>Inverse Warp & Magnification Artifact Removal</h3>
+    <p>Result Image: inverse_magnification.jpg</p>
+    <img src="results/inverse_magnification.jpg" alt="inverse_magnification.jpg" align="middle"> 
+
+<p>&nbsp;</p>    
+ 
+    <h3>Inverse Warp & Both Artifact Removals</h3>
+    <p>Result Image: inverse_both.jpg</p>
+    <img src="results/inverse_both.jpg" alt="inverse_both .jpg" align="middle"> 
+<p>&nbsp;</p>    
+-->
+    <hr>
+
+    <h3>Clemson University</h3>
+    <p>CPSC 6040: Computer Graphics Images, Ioannis Karamouzas</p>
+   
+    
+</body>
+</html>

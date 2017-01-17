@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+    <title>Tone Mapping</title>
+</head>
+
+<body>
+    <header>
+        <h1>Final Project: Tone Mapping</h1>
+
+        <hr>
+
+        <h4>Name: Mandy Smoak &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Date: November 29, 2016</h4>
+
+        <hr>
+    </header>
+        
+        <h2>Problem Description</h2>
+        
+        <p>For my final project, I have developed a program to tone map HDR images using the point and region processing filtering. HDR images store a high dynamic range of values, typically five or more orders of magnitude. The code implements three different HDR tone mapping operators. The first tone mapping operator will be to gamma correct the image, in its log space of its luminance. The second tone mapping operator separately processes the low-pass and high-pass data of the log channel--which will be built using convolution. And finally, I have modified my convolution-based tone mapper to use a bilateral filter. </p>
+
+        <p>A complete explaination can be found at <a href=" ">https://people.cs.clemson.edu/~levinej/courses/F15/6040/assignments/pa05.pdf</a></p>
+
+<hr>
+        
+        <h2>Basic Requirements</h2>
+         <ul>
+            <li>Reads, writes, displays images using OIIO and OpenGL</li>
+            <li>Handles input from keyboard</li>
+            <li>Performs simple tonemap (-g flag) on the image file provided by user</li>
+            <li>Performs tone mapping with convolution (-c flag)</li>
+         </ul>
+
+        <h2>Advanced Extension</h2>
+         <ul>
+            <li>Performs tone mapping with convolution using bilateral filter (-b flag)</li>
+         </ul>
+         <hr>
+
+         <h2>Instructions</h2>     
+
+         <p>The following commands can be used in the terminal for complication, execution, and clean-up.
+        
+         <h4> Compile: </h4>
+         <p> $> make </p>
+         <h4> Execute: </h4>
+         <p> $> ./tonemap input.img -g gamma_value [output.img]</p>
+         <ul>
+            <li>Use -g flag for simple tonemap</li>
+         </ul>
+         <p> $> ./tonemap input.img -c [output.img]</p>    
+         <ul>
+            <li>Use -c flag for tonemap for convoluted tonemap</li>
+         </ul>     
+         <p> $> ./tonemap input.img -b [output.img]</p>   
+         <ul>
+            <li>Use -b flag for convoluted tonemap using bilateral filter</li>
+         </ul>       
+         <p> where [ ]'s indicate optional parameter.</p>
+         <h4> Clean: </h4>
+         <p> $> make clean </p>
+         <h4> Notes: </h4>
+         <p> Press "w" for writing displayed image. </p>
+         <p> Press "s" to switch between original image and toned image. </p>
+         <p> For boundary mechanism, I have used the padding technique. If the filter is of size x then 
+         I am adding a boundary of x/2 on all four sides of the image. I am setting the pixels that fall 
+         outside image boundary to black. The <strong>void padImage()</strong> method does this job.
+
+    <hr>
+
+    <h2>Experimentation & Results</h2>
+    
+    <h3>Original Images</h3>
+	<img src="ocean.png" alt="ocean.png" align="middle" width="50%" height="50%">
+	<img src="room.png" alt="room.png" align="middle" width="25%" height="25%">
+    
+<p>&nbsp;</p>    
+	
+    <h3>Simple Tone Map</h3>
+    <p>Gamma Value: 0.45 <br />
+    <p>Result Image: ocean_simple.png</p>
+    <img src="results/ocean_simple.png" alt="ocean_simple.png" align="middle">
+    <p>Gamma Value: 0.15 <br />
+    <p>Result Image: room_simple.png</p>
+    <img src="results/room_simple.png" alt="room_simple.png" align="middle">
+   
+<p>&nbsp;</p>    
+
+    <h3>Tone Map with Convolution</h3>
+    <p>Box Filter's Sigma Value: 10 &nbsp;&nbsp; Contrast Threshold: 5<br />
+    <p>Result Image: ocean_convolution.png</p>
+    <img src="results/ocean_convolution.png" alt="ocean_convolution.png" align="middle">
+    <p>Box Filter's Sigma Value: 3 &nbsp;&nbsp; Contrast Threshold: 30<br />
+    <p>Result Image: room_convolution.png</p>
+    <img src="results/room_convolution.png" alt="room_convolution.png" align="middle">    
+   
+<p>&nbsp;</p>    
+
+    <h3>Tone Map with Convolution and Bilateral Filtering</h3>
+    <p>Box Filter's Sigma Value: 5 &nbsp;&nbsp; Contrast Threshold: 5<br />
+    <p>Result Image: ocean_bilateral.png</p>
+    <img src="results/ocean_bilateral.png" alt="ocean_bilateral.png" align="middle"> 
+    <p>Box Filter's Sigma Value: 5 &nbsp;&nbsp; Contrast Threshold: 30<br />
+    <p>Result Image: room_bilateral.png</p>
+    <img src="results/room_bilateral.png" alt="room_bilateral.png" align="middle">   
+
+    <hr>
+
+    <h3>Clemson University</h3>
+    <p>CPSC 6040: Computer Graphics Images, Ioannis Karamouzas</p>
+   
+    
+</body>
+</html>
