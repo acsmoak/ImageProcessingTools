@@ -6,19 +6,19 @@ This repository contains the image processing tools written throughout my CPSC 6
 
 The included tools perform  
 
-    - simple image reading and writing
+    - simple image reading and writing (Homework 1)
     
-    - alpha masking
+    - alpha masking (Homework 3)
     
-    - compositing 
+    - compositing (Homework 3) 
     
-    - convolution
+    - convolution (Homework 4)
     
-    - warper
+    - warper (Homework 5)
     
-    - removing artifacts 
+    - removing artifacts (Homework 6) 
     
-    - and tone mapping
+    - and tone mapping (Final Project)
     
     
 Languages and Packages Used: C++, OpenGL, GLUT, OpenImageIO. 
