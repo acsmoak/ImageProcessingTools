@@ -8,5 +8,5 @@ Please download and open README.html for tool description, usage, and results.
 -or-
 
 simply click 
-http://htmlpreview.github.io/?https://github.com/acsmoak/ImageProcessingTools/blob/master/AlbersColor/README.html.
+ http://htmlpreview.github.io/?https://github.com/acsmoak/ImageProcessingTools/blob/master/AlbersColor/README.html
 
