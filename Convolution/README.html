@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+    <title>Convolution</title>
+</head>
+
+<body>
+    <header>
+        <h1>Homework 4: Spatial Convolution</h1>
+
+        <hr>
+
+        <h4>Name: Mandy Smoak &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Date: October 24, 2016</h4>
+
+        <hr>
+    </header>
+        
+        <h2>Problem Description</h2>
+        
+        <p>Probably the most important set of filtering operations is implemented by taking a weighted sum or difference of pixels within a neighborhood to produce each output pixel. This approach implements the mathematical concept of the convolution of two functions. The idea is easy to follow, as it can be thought of as sliding a rectangular array of weights over an image, replacing the pixel positioned at the center of the array by the appropriately weighted sum of the pixels under the array. The array of weights is commonly called the convolution kernel.  </p>
+
+        <p>Convolution lies at the heart of any physical device or computational procedure that performs smoothing or sharpening. Applied to two dimensional functions like images, it's also useful for edge finding, feature detection, motion detection, image matching, and countless other tasks.  </p>
+
+<hr>
+        
+        <h2>Basic Requirements</h2>
+         <ul>
+            <li>Reads, writes, displays images using OIIO and OpenGL</li>
+            <li>Handles input from keyboard</li>
+            <li>Takes an image and a filter (specified by [filter].filt) and calculates a convolution of the filter on the image</li>
+            <li>For <i><b>boundary handling</b></i>, the program sets pixels that lie outside of the image boundaries to black (i.e. r = b = g = 0). Handled in calculateFilterMap  </li>
+         </ul>
+
+		<h2>Extension</h2>
+		<p>Unfortunately, due to time constraints, I was unable to complete a properly functioning Gabor Filter function. </p>
+         <hr>
+
+         <h2>Instructions</h2>     
+
+         <p>The following commands can be used in the terminal for complication, execution, and clean-up.
+        
+         <h4> Compile: </h4>
+         <p> $> make </p>
+         <h4> Execute: </h4>
+         <p> $> filt filter.filt input.img </p> 
+         <ul>
+            <li>Displays the input image in an opengl window</li>
+            <li>Press 'c' to convolve the image by the specified filter [filter.filt]</li>
+            <li>Press 'r' to restore the image to it's original contents</li>
+         </ul>
+         <p> $> filt filter.filt input.img output.img </p>
+         <ul>
+            <li>Same functionality as above except pressing 'w' writes the image in the opengl window to output.img</li>
+         </ul>
+         <h4> Clean: </h4>
+         <p> $> make clean </p>
+
+    <hr>
+    <h2>Experimentation</h2>
+    
+    <h3>Original Image</h3>
+	<img src="convolve/images/checkers.png" alt="checkers.png" align="middle">
+    
+    <p> The following images have been convolved 2-3 times to better analyze the result of the convolution kernel.</p>
+	
+    <p>Experiment: checkers.png with pulse.filt<br />
+    Output:     checkers_pulse.png<br />
+    Result:     Blurred and (maybe) added noise to the image</p>
+    <img src="results/checkers_pulse.png" alt="checkers_pulse.png" align="middle">
+
+    <p>Experiment: checkers.png with tent.filt<br />
+    Output:     checkers_tent.png<br />
+    Result:     Blurred the image slightly</p>
+    <img src="results/checkers_tent.png" alt="checkers_tent.png" align="middle">
+
+    <p>Experiment: checkers.png with hp.filt<br />
+    Output:     checkers_hp.png<br />
+    Result:     Highlighted the edges within the image</p>
+    <img src="results/checkers_hp.png" alt="checkers_hp.png" align="middle">
+
+    <p>Experiment: checkers.png with sobol-horiz.filt<br />
+    Output:     checkers_sobol-horiz.png<br />
+    Result:     Highlighted the vertical lines within the image</p>
+    <img src="results/checkers_sobol-horiz.png" alt="checkers_sobol-horiz.png" align="middle">
+
+    <p>Experiment: checkers.png with sobol-vert.filt<br />
+    Output:     checkers_sobol-vert.png<br />
+    Result:     Highlighted the horizontal lines within the image</p>
+    <img src="results/checkers_sobol-vert.png" alt="checkers_sobol-vert.png" align="middle">
+
+	<hr>
+	
+	<h2>My Filter and Results</h2>
+	
+	<p>myFilter:<br />
+	[3<br />
+	1  1  1<br />
+	-5 0  5<br />
+	1  1  1]<br /></p>
+	
+	<p>Result: This filter shifts the resulting image down, darkens the image, and slightly increases contrast.</p>
+	<p>Images: The following images display my results after convolution--0, 2, 10, and 35 times, respectively--using myFilter.filt on brushes.png.</p>
+	
+	<img src="convolve/images/brushes.png" alt="brushes.png" align="middle">
+    <img src="results/brushes_myFilter4.png" alt="brushes_myFilter4.png" align="middle">    
+    <img src="results/brushes_myFilter2.png" alt="brushes_myFilter2.png" align="middle">
+    <img src="results/brushes_myFilter.png" alt="brushes_myFilter.png" align="middle">
+    
+    
+    
+    <hr>
+    <h3>Clemson University</h3>
+    <p>CPSC 6040: Computer Graphics Images, Ioannis Karamouzas</p>
+   
+    
+</body>
+</html>
